@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace GraficadorSenales
 {
@@ -152,6 +153,30 @@ namespace GraficadorSenales
             }
 
             return resultado;
+        }
+
+        public static Senal transformar(Senal senal)
+        {
+            SenalPersonalizada transformada =
+                new SenalPersonalizada();
+
+            transformada.TiempoInicial = senal.TiempoInicial;
+            transformada.TiempoFinal = senal.TiempoFinal;
+
+            for(int k=0; k < senal.Muestras.Count; k++)
+            {
+                Complex muestra = 0;
+
+                for(int n=0; n<senal.Muestras.Count; n++)
+                {
+                    muestra += senal.Muestras[n].y * Complex.Exp(-2 * Math.PI * Complex.ImaginaryOne * k * n / senal.Muestras.Count);
+                }
+
+                transformada.Muestras.Add(
+                    new Muestra(k, muestra.Magnitude));
+            }
+
+            return transformada;
         }
     }
 }

@@ -179,5 +179,42 @@ namespace GraficadorSenales
             txtUmbral.IsEnabled = false;
             txtUmbral.Text = "1";
         }
+
+        private void btnFourier_Click(object sender, RoutedEventArgs e)
+        {
+            Senal transformada =
+                Senal.transformar(senal);
+
+            //Limpia las gráficas.
+            plnGraficaResultado.Points.Clear();
+
+            lblAmplitudMaximaY_Copy.Text = transformada.amplitudMaxima.ToString("F");
+            lblAmplitudMaximaY_Negativa_Copy.Text = "-" + transformada.amplitudMaxima.ToString("F");
+
+            //Graficando PRIMERA señal.
+            if (transformada != null)
+            {
+                //Recorrer una colección o arreglo.
+                foreach (Muestra muestra in transformada.Muestras)
+                {
+                    plnGraficaResultado.Points.Add(new Point((muestra.x - transformada.TiempoInicial) * scrResultadoOperacion.Width,
+                        (muestra.y / transformada.amplitudMaxima) * ((scrResultadoOperacion.Height / 2.0) - 30) * -1 + (scrResultadoOperacion.Height / 2)));
+                }
+            }
+
+            //Graficando el eje de X
+            plnEjeXResultado.Points.Clear();
+            //Punto de inicio.
+            plnEjeXResultado.Points.Add(new Point(0, (scrResultadoOperacion.Height / 2)));
+            //Punto de fin.
+            plnEjeXResultado.Points.Add(new Point((transformada.TiempoFinal - transformada.TiempoInicial) * scrResultadoOperacion.Width, (scrResultadoOperacion.Height / 2)));
+
+            //Graficando el eje de Y
+            plnEjeYResultado.Points.Clear();
+            //Punto de inicio.
+            plnEjeYResultado.Points.Add(new Point(0 - transformada.TiempoInicial * scrResultadoOperacion.Width, scrResultadoOperacion.Height));
+            //Punto de fin.
+            plnEjeYResultado.Points.Add(new Point(0 - transformada.TiempoInicial * scrResultadoOperacion.Width, scrResultadoOperacion.Height * -1));
+        }
     }
 }
