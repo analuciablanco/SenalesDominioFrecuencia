@@ -182,8 +182,8 @@ namespace GraficadorSenales
 
         private void btnFourier_Click(object sender, RoutedEventArgs e)
         {
-            Senal transformada =
-                Senal.transformar(senal);
+            Senal transformada = Senal.transformar(senal);
+            transformada.actualizarAmplitudMaxima();
 
             //Limpia las gráficas.
             plnGraficaResultado.Points.Clear();
@@ -197,8 +197,32 @@ namespace GraficadorSenales
                 //Recorrer una colección o arreglo.
                 foreach (Muestra muestra in transformada.Muestras)
                 {
+                    //Se va graficando la transformada.
                     plnGraficaResultado.Points.Add(new Point((muestra.x - transformada.TiempoInicial) * scrResultadoOperacion.Width,
                         (muestra.y / transformada.amplitudMaxima) * ((scrResultadoOperacion.Height / 2.0) - 30) * -1 + (scrResultadoOperacion.Height / 2)));
+                }
+
+                double valorMaximo = 0;
+                int indiceMaximo = 0;
+                int indiceActual = 0;
+
+                //Recorrer una colección o arreglo.
+                foreach (Muestra muestra in transformada.Muestras)
+                {
+                    //Buscamos el valor máximo y el indice actual.
+                    if (muestra.y > valorMaximo)
+                    {
+                        valorMaximo = muestra.y;
+                        indiceMaximo = indiceActual;
+                    }
+
+                    indiceActual++;
+
+                    //Evaluamos en la primera mitad de la gráfica de la transformada.
+                    if (indiceActual > (double)transformada.Muestras.Count/2.0)
+                    {
+                        break;
+                    }
                 }
             }
 

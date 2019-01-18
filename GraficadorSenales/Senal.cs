@@ -1,9 +1,11 @@
-﻿using System;
+﻿#region // all using
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+#endregion // all using
 
 namespace GraficadorSenales
 {
@@ -157,11 +159,10 @@ namespace GraficadorSenales
 
         public static Senal transformar(Senal senal)
         {
-            SenalPersonalizada transformada =
-                new SenalPersonalizada();
-
+            SenalPersonalizada transformada = new SenalPersonalizada();
             transformada.TiempoInicial = senal.TiempoInicial;
             transformada.TiempoFinal = senal.TiempoFinal;
+            transformada.FrecMuestreo = senal.FrecMuestreo;
 
             for(int k=0; k < senal.Muestras.Count; k++)
             {
@@ -172,8 +173,7 @@ namespace GraficadorSenales
                     muestra += senal.Muestras[n].y * Complex.Exp(-2 * Math.PI * Complex.ImaginaryOne * k * n / senal.Muestras.Count);
                 }
 
-                transformada.Muestras.Add(
-                    new Muestra(k, muestra.Magnitude));
+                transformada.Muestras.Add(new Muestra((double)k/(double)senal.Muestras.Count, muestra.Magnitude));
             }
 
             return transformada;
