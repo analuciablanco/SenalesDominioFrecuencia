@@ -224,6 +224,10 @@ namespace GraficadorSenales
                         break;
                     }
                 }
+
+                double frecuenciaFundamental = (double)indiceMaximo * senal.FrecMuestreo / (double)transformada.Muestras.Count;
+
+                lblHz.Text = frecuenciaFundamental.ToString() + " Hz";
             }
 
             //Graficando el eje de X
