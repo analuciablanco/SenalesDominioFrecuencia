@@ -40,7 +40,7 @@
         <Button x:Name="btnFourier" Content="Transformada de Fourier" HorizontalAlignment="Left" Margin="71,356,0,0" VerticalAlignment="Top" Width="170" Click="btnFourier_Click"/>
         <TextBlock x:Name="lblHz" HorizontalAlignment="Left" Margin="1054,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Width="120" Height="32"><Run Text="0 "/><Run Text="Hz"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="18,27,0,0" TextWrapping="Wrap" Text="Ruta de archivo:" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="152,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" FontSize="16"/>
-        <Button Content="Examinar" HorizontalAlignment="Left" Margin="352,59,0,0" VerticalAlignment="Top" Width="95" FontSize="16" Click="Button_Click"/>
+        <TextBox x:Name="txtRutaArchivo" HorizontalAlignment="Left" Height="23" Margin="152,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" FontSize="16"/>
+        <Button Content="Examinar" HorizontalAlignment="Left" Margin="352,59,0,0" VerticalAlignment="Top" Width="95" FontSize="16" Click="btn_Examinar"/>
     </Grid>
 </Window>
